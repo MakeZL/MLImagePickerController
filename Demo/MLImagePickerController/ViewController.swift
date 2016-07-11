@@ -8,6 +8,7 @@
 //  issue: https://github.com/MakeZL/MLImagePickerController/issues/new
 
 import UIKit
+import PhotosUI
 
 class ViewController: UIViewController,
                       MLImagePickerControllerDelegate,
@@ -16,8 +17,9 @@ class ViewController: UIViewController,
 {
 
     @IBOutlet weak var tableView: UITableView!
-    var assets:NSArray? = []
-    var assetIdentifiers:NSArray? = []
+    var assets:Array<UIImage>? = []
+    var assetIdentifiers:Array<String>? = []
+    var phImageFileUrls:Array<NSURL>? = []
     var quickView:MLImagePickerQuickView?
     
     override func viewDidLoad() {
@@ -25,6 +27,33 @@ class ViewController: UIViewController,
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
+    // MARK: UITableViewDataSource
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.assets != nil ? self.assets!.count : 0
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell")
+        cell?.imageView!.image = self.assets![indexPath.item]
+        return cell!
+    }
+    
+    /**
+     CallBack
+     
+     - parameter assets:           Array<UIImage>
+     - parameter assetIdentifiers: Array<String>
+     */
+    func imagePickerDidSelectedAssets(assets: Array<UIImage>, assetIdentifiers: Array<String>, phImageFileUrls: Array<NSURL>) {
+        self.assets = assets
+        self.assetIdentifiers = assetIdentifiers
+        self.phImageFileUrls = phImageFileUrls
+        self.tableView.reloadData()
+    }
+
+    /**
+    *  @IBAction
+    */
     @IBAction func selectPhoto() {
         let pickerVc = MLImagePickerController()
         // 回调
@@ -32,7 +61,7 @@ class ViewController: UIViewController,
         // 最大图片个数
         pickerVc.selectPickerMaxCount = 20
         // 默认记录选择的图片
-        pickerVc.selectIndentifiers = self.assetIdentifiers?.mutableCopy() as! NSMutableArray
+        pickerVc.selectIndentifiers = self.assetIdentifiers!
         pickerVc.show(self)
     }
     
@@ -44,7 +73,7 @@ class ViewController: UIViewController,
         // 最大图片个数
         quickView.selectPickerMaxCount = 20
         // 默认记录选择的图片
-        quickView.selectIndentifiers = self.assetIdentifiers?.mutableCopy() as! NSMutableArray
+        quickView.selectIndentifiers = self.assetIdentifiers
         // 如果不传的话，预览不能打开相册
         quickView.viewControllerReponse = self
         // 准备工作
@@ -52,21 +81,4 @@ class ViewController: UIViewController,
         self.view.addSubview(quickView)
         self.quickView = quickView
     }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.assets != nil ? self.assets!.count : 0
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell")
-        cell?.imageView!.image = self.assets![indexPath.item] as? UIImage
-        return cell!
-    }
-    
-    func imagePickerDidSelectedAssets(assets: NSArray, assetIdentifiers: NSArray) {
-        self.assets = assets
-        self.assetIdentifiers = assetIdentifiers
-        self.tableView.reloadData()
-    }
-
 }

@@ -344,12 +344,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 120886865@qq.com (T9N6CMK6E9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (D2ZAZ554Z4)";
 				INFOPLIST_FILE = MLImagePickerController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lavion.TheAppearance;
+				PRODUCT_BUNDLE_IDENTIFIER = com.makezl.MLImagePickerController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9694fb47-d168-4af5-a35f-e7f2769a0af3";
+				PROVISIONING_PROFILE = "c38deeb3-c442-454d-9fcf-671fc9090c69";
 			};
 			name = Debug;
 		};
@@ -357,12 +357,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 120886865@qq.com (T9N6CMK6E9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (D2ZAZ554Z4)";
 				INFOPLIST_FILE = MLImagePickerController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lavion.TheAppearance;
+				PRODUCT_BUNDLE_IDENTIFIER = com.makezl.MLImagePickerController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9694fb47-d168-4af5-a35f-e7f2769a0af3";
+				PROVISIONING_PROFILE = "c38deeb3-c442-454d-9fcf-671fc9090c69";
 			};
 			name = Release;
 		};

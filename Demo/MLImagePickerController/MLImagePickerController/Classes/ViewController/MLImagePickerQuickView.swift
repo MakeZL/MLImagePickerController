@@ -20,9 +20,10 @@ class MLImagePickerQuickView: UIView,
     
     private var fetchResult:PHFetchResult!
     private var imageManager:MLImagePickerAssetsManger!
-    private let photoIdentifiers:NSMutableArray = []
-    private let selectImages:NSMutableArray = []
-    private let listsImages:NSMutableArray = []
+    private var photoIdentifiers:Array<String> = []
+    private var phImageFileUrls:Array<NSURL>! = []
+    private var selectImages:Array<UIImage> = []
+    private var listsImages:Array<UIImage> = []
     
     private var collectionView:UICollectionView!
     private var redTagLbl:UILabel!
@@ -33,7 +34,7 @@ class MLImagePickerQuickView: UIView,
     // <MLImagePickerControllerDelegate>, SelectAssets CallBack
     var delegate:MLImagePickerControllerDelegate?
     // Selected Indentifiers Assets
-    var selectIndentifiers:NSMutableArray = []
+    var selectIndentifiers:Array<String>! = []
     // Setting Max Multiselect Count
     var selectPickerMaxCount:Int! = 9
     // Scroll Selecte Pickers, Default is YES
@@ -113,27 +114,33 @@ class MLImagePickerQuickView: UIView,
         let requestOptions = PHImageRequestOptions()
         requestOptions.deliveryMode = .HighQualityFormat
         requestOptions.networkAccessAllowed = true
+        requestOptions.synchronous = true
         
         let count = self.fetchResult.count > 50 ? 50 : self.fetchResult.count
         
         for (var i = 0; i < count; i++){
             let asset:PHAsset = self.fetchResult[i] as! PHAsset
-            self.photoIdentifiers.addObject(asset.localIdentifier)
+            self.photoIdentifiers.append(asset.localIdentifier)
             
-            self.imageManager.requestImageForAsset(asset, targetSize: CGSizeMake(100,100), contentMode: .AspectFill, options: requestOptions) { (let image, let info:[NSObject : AnyObject]?) -> Void in
-                self.listsImages.addObject(image!)
+            self.imageManager.requestImageForAsset(asset, targetSize: CGSizeMake(self.frame.height,self.frame.height), contentMode: .AspectFill, options: requestOptions) { (let image, let info:[NSObject : AnyObject]?) -> Void in
+                self.listsImages.append(image!)
                 
-                if self.selectIndentifiers.containsObject(asset.localIdentifier) == true {
-                    self.selectImages.addObject(image!)
+                if self.selectIndentifiers.contains(asset.localIdentifier) == true {
+                    
+                    self.selectImages.append(image!)
+                    if info![PHImageFileURLKey] != nil {
+                        self.phImageFileUrls.append(info![PHImageFileURLKey] as! NSURL)
+                    }
                 }
-                
-                self.collectionView?.reloadData()
-                self.collectionView?.layoutIfNeeded()
                 
                 UIView.animateWithDuration(0.25, animations: { () -> Void in
                     self.albumContainerView.frame = self.bounds
                 })
+                
+                self.collectionView?.reloadData()
+                self.collectionView?.layoutIfNeeded()
             }
+            
         }
     }
     
@@ -152,17 +159,17 @@ class MLImagePickerQuickView: UIView,
         cell.delegate = self
         cell.asset = asset
         cell.indexPath = indexPath
-        cell.localIdentifier = self.photoIdentifiers[indexPath.item] as! String
-        cell.selectButtonSelected = self.selectIndentifiers.containsObject(cell.localIdentifier)
+        cell.localIdentifier = self.photoIdentifiers[indexPath.item]
+        cell.selectButtonSelected = self.selectIndentifiers.contains(cell.localIdentifier)
         cell.isShowVideo = (asset.mediaType == .Video)
-        cell.imageV.image = self.listsImages[indexPath.item] as? UIImage
+        cell.imageV.image = self.listsImages[indexPath.item]
         
         return cell
     }
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        let image:UIImage = self.listsImages[indexPath.item] as! UIImage
+        let image:UIImage = self.listsImages[indexPath.item]
         let radio:CGFloat = image.size.height / collectionView.frame.height
         
         return CGSize(width: image.size.width / radio, height: collectionView.frame.height)
@@ -177,19 +184,22 @@ class MLImagePickerQuickView: UIView,
             if (self.checkBeyondMaxSelectPickerCount() == false){
                 return false
             }
-            if self.selectIndentifiers.containsObject(identifier) == false {
+            if self.selectIndentifiers.contains(identifier) == false {
                 // Insert
-                self.selectIndentifiers.addObject(identifier)
+                self.selectIndentifiers.append(identifier)
             }else{
                 return false;
             }
         }else{
             // Delete
-            if selectIndentifiers.containsObject(identifier) {
-                let index = self.selectIndentifiers.indexOfObject(identifier)
-                self.selectImages.removeObjectAtIndex(index)
+            if selectIndentifiers.contains(identifier) {
+                let index = self.selectIndentifiers.indexOf(identifier)
+                self.phImageFileUrls.removeAtIndex(index!)
+                self.selectImages.removeAtIndex(index!)
             }
-            self.selectIndentifiers.removeObject(identifier)
+            
+            let identifierIndex = self.selectIndentifiers.indexOf(identifier)
+            self.selectIndentifiers.removeAtIndex(identifierIndex!)
             
             self.redTagLbl.hidden = (self.selectIndentifiers.count == 0)
             self.redTagLbl.text = "\(self.selectIndentifiers.count)"
@@ -203,8 +213,10 @@ class MLImagePickerQuickView: UIView,
         
         self.imageManager.requestImageForAsset(asset, targetSize: CGSizeMake(100,100), contentMode: .AspectFill, options: requestOptions) { (let image, let info:[NSObject : AnyObject]?) -> Void in
             if image != nil {
-                self.selectImages.addObject(image!)
-                
+                self.selectImages.append(image!)
+                if info![PHImageFileURLKey] != nil {
+                    self.phImageFileUrls.append(info!["PHImageFileURLKey"] as! NSURL)
+                }
                 self.redTagLbl.hidden = (self.selectIndentifiers.count == 0)
                 self.redTagLbl.text = "\(self.selectIndentifiers.count)"
             }
@@ -226,7 +238,7 @@ class MLImagePickerQuickView: UIView,
     
     func done(){
         if self.delegate != nil{
-            self.delegate?.imagePickerDidSelectedAssets(self.selectImages, assetIdentifiers: self.selectIndentifiers)
+            self.delegate?.imagePickerDidSelectedAssets(self.selectImages, assetIdentifiers: self.selectIndentifiers, phImageFileUrls: self.phImageFileUrls)
         }
         
         UIView.animateWithDuration(0.25, animations: { () -> Void in
@@ -250,7 +262,7 @@ class MLImagePickerQuickView: UIView,
         // 最大图片个数
         pickerVc.selectPickerMaxCount = 20
         // 默认记录选择的图片
-        pickerVc.selectIndentifiers = self.selectIndentifiers.mutableCopy() as! NSMutableArray
+        pickerVc.selectIndentifiers = self.selectIndentifiers
         pickerVc.show(self.viewControllerReponse!)
     }
 
