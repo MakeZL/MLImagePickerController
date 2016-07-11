@@ -99,7 +99,6 @@ class MLImagePickerController:  UIViewController,
         }
         self.collectionView?.reloadData()
         self.collectionView?.layoutIfNeeded()
-
         if self.cancleLongGestureScrollSelectedPicker == false {
             self.collectionView?.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "longPressGestureScrollPhoto:"))
         }
@@ -356,7 +355,9 @@ class MLImagePickerController:  UIViewController,
         self.imageManager.requestImageForAsset(asset, targetSize: AssetGridThumbnailSize, contentMode: .AspectFill, options: requestOptions) { (let image, let info:[NSObject : AnyObject]?) -> Void in
             if image != nil {
                 self.selectImages.append(image!)
-                self.phImageFileUrls.append(info![PHImageFileURLKey] as! NSURL)
+                if info![PHImageFileURLKey] != nil {
+                    self.phImageFileUrls.append(info![PHImageFileURLKey] as! NSURL)
+                }
                 self.redTagLbl.hidden = (self.selectIndentifiers.count == 0)
                 self.redTagLbl.text = "\(self.selectIndentifiers.count)"
             }

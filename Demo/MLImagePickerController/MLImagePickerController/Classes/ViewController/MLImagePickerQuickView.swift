@@ -126,11 +126,11 @@ class MLImagePickerQuickView: UIView,
                 self.listsImages.append(image!)
                 
                 if self.selectIndentifiers.contains(asset.localIdentifier) == true {
-                    
                     self.selectImages.append(image!)
                     if info![PHImageFileURLKey] != nil {
                         self.phImageFileUrls.append(info![PHImageFileURLKey] as! NSURL)
                     }
+                    self.selectImages.append(image!)
                 }
                 
                 UIView.animateWithDuration(0.25, animations: { () -> Void in
