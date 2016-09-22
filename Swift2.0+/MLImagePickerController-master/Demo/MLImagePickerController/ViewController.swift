@@ -24,16 +24,16 @@ class ViewController: UIViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     // MARK: UITableViewDataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.assets != nil ? self.assets!.count : 0
     }
- 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell")
         cell?.imageView!.image = self.assets![indexPath.item]
         return cell!
     }
@@ -62,13 +62,13 @@ class ViewController: UIViewController,
         pickerVc.selectPickerMaxCount = 20
         // 默认记录选择的图片
         pickerVc.selectIndentifiers = self.assetIdentifiers!
-        pickerVc.show(vc: self)
+        pickerVc.show(self)
     }
     
     @IBAction func quick() {
         self.quickView?.removeFromSuperview()
         
-        let quickView = MLImagePickerQuickView(frame: CGRect(x:0, y:self.view.frame.height - 250, width:self.view.frame.width, height:250))
+        let quickView = MLImagePickerQuickView(frame: CGRectMake(0, self.view.frame.height - 250, self.view.frame.width, 250))
         quickView.delegate = self
         // 最大图片个数
         quickView.selectPickerMaxCount = 20

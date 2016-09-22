@@ -16,8 +16,8 @@ class MLImagePickerGroupCell: UITableViewCell {
     @IBOutlet weak var selectedImgV: UIImageView!
     var selectedStatus:Bool! = false {
         didSet{
-            self.selectedImgV.isHidden = !self.selectedStatus
-            self.selectedImgV.image = UIImage.ml_imageFromBundleNamed(named: "zl_star");
+            self.selectedImgV.hidden = !self.selectedStatus
+            self.selectedImgV.image = UIImage.ml_imageFromBundleNamed("zl_star");
         }
     }
     

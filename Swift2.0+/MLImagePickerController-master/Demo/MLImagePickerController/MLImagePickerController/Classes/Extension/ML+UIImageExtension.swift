@@ -10,7 +10,7 @@ import UIKit
 
 extension UIImage{
     class func ml_imageFromBundleNamed(named:String)->UIImage{
-        let image = UIImage(named: "MLImagePickerController.bundle".appendingFormat("/"+(named as String)))!
+        let image = UIImage(named: "MLImagePickerController.bundle".stringByAppendingString("/"+(named as String)))!
         return image
     }
 }

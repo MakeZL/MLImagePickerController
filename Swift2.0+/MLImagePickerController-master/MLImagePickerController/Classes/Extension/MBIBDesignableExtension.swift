@@ -16,10 +16,10 @@ extension UILabel{
             return "0xffffff";
         }
         set {
-            let scanner = Scanner(string: newValue as String)
+            let scanner = NSScanner(string: newValue as String)
             var hexNum = 0 as UInt32
             
-            if (scanner.scanHexInt32(&hexNum)){
+            if (scanner.scanHexInt(&hexNum)){
                 let r = (hexNum >> 16) & 0xFF
                 let g = (hexNum >> 8) & 0xFF
                 let b = (hexNum) & 0xFF
@@ -36,15 +36,15 @@ extension UIButton{
             return "0xffffff";
         }
         set {
-            let scanner = Scanner(string: newValue as String)
+            let scanner = NSScanner(string: newValue as String)
             var hexNum = 0 as UInt32
             
-            if (scanner.scanHexInt32(&hexNum)){
+            if (scanner.scanHexInt(&hexNum)){
                 let r = (hexNum >> 16) & 0xFF
                 let g = (hexNum >> 8) & 0xFF
                 let b = (hexNum) & 0xFF
                 
-                self.setTitleColor(UIColor(red: CGFloat(r)/255.0, green: CGFloat(g)/255.0, blue: CGFloat(b)/255.0, alpha: 1.0), for: .normal)
+                self.setTitleColor(UIColor(red: CGFloat(r)/255.0, green: CGFloat(g)/255.0, blue: CGFloat(b)/255.0, alpha: 1.0), forState: .Normal)
             }
         }
     }
@@ -72,10 +72,10 @@ extension UIView{
     
     @IBInspectable var borderColor: UIColor {
         get {
-            return UIColor(cgColor: layer.borderColor!)
+            return UIColor(CGColor: layer.borderColor!)
         }
         set {
-            layer.borderColor = newValue.cgColor
+            layer.borderColor = newValue.CGColor
         }
     }
     
@@ -85,10 +85,10 @@ extension UIView{
         }
         set {
             
-            let scanner = Scanner(string: newValue as String)
+            let scanner = NSScanner(string: newValue as String)
             var hexNum = 0 as UInt32
             
-            if (scanner.scanHexInt32(&hexNum)){
+            if (scanner.scanHexInt(&hexNum)){
                     let r = (hexNum >> 16) & 0xFF
                     let g = (hexNum >> 8) & 0xFF
                     let b = (hexNum) & 0xFF
@@ -105,7 +105,7 @@ extension UIView{
         }
         set {
             if (onePx == true){
-                self.frame = CGRect(x:self.frame.origin.x, y:self.frame.origin.y, width:self.frame.size.width, height:1 / UIScreen.main.scale)
+                self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, 1 / UIScreen.mainScreen().scale)
             }
         }
     }

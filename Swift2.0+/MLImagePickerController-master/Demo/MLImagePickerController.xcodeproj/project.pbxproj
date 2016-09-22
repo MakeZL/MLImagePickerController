@@ -181,8 +181,6 @@
 				TargetAttributes = {
 					480C7BFE1C96BD970002831A = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = G4WSYFLMKJ;
-						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -278,7 +276,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tian Xiao (8LR4492S74)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -298,7 +295,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -323,7 +320,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tian Xiao (8LR4492S74)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -337,7 +333,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -348,16 +344,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tian Xiao (8LR4492S74)";
-				DEVELOPMENT_TEAM = G4WSYFLMKJ;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (D2ZAZ554Z4)";
 				INFOPLIST_FILE = MLImagePickerController/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = dimsky.MLImagePickerController;
+				PRODUCT_BUNDLE_IDENTIFIER = com.makezl.MLImagePickerController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "72f27906-39bb-4df6-9a63-afe78ac84071";
-				PROVISIONING_PROFILE_SPECIFIER = "dimsky.* dev_profile";
-				SWIFT_VERSION = 3.0;
+				PROVISIONING_PROFILE = "c38deeb3-c442-454d-9fcf-671fc9090c69";
 			};
 			name = Debug;
 		};
@@ -365,16 +357,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tian Xiao (8LR4492S74)";
-				DEVELOPMENT_TEAM = B3C9PH5883;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (D2ZAZ554Z4)";
 				INFOPLIST_FILE = MLImagePickerController/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = dimsky.MLImagePickerController;
+				PRODUCT_BUNDLE_IDENTIFIER = com.makezl.MLImagePickerController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "72f27906-39bb-4df6-9a63-afe78ac84071";
-				PROVISIONING_PROFILE_SPECIFIER = "dimsky.* dev_profile";
-				SWIFT_VERSION = 3.0;
+				PROVISIONING_PROFILE = "c38deeb3-c442-454d-9fcf-671fc9090c69";
 			};
 			name = Release;
 		};

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MLImagePickerGroupCell" id="dos-VA-WZ9" customClass="MLImagePickerGroupCell" customModule="MLImagePickerController" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dos-VA-WZ9" id="vvR-al-h9s">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fQ-IN-Ccv">
+                        <rect key="frame" x="15" y="8" width="37.5" height="43.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.2784313725" green="0.2784313725" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QoF-mc-5Bg">
+                        <rect key="frame" x="62" y="22" width="33" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KMn-Rk-jSO" userLabel="LineView">
+                        <rect key="frame" x="0.0" y="58.5" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="5Uk-fW-Yx0"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="onePx" value="YES"/>
+                            <userDefinedRuntimeAttribute type="string" keyPath="hexRgbColor" value="e7e7e7"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="KMn-Rk-jSO" secondAttribute="trailing" id="1ok-iI-MhQ"/>
+                    <constraint firstItem="4fQ-IN-Ccv" firstAttribute="leading" secondItem="vvR-al-h9s" secondAttribute="leading" constant="15" id="E54-Sh-TOf"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="4fQ-IN-Ccv" secondAttribute="bottom" id="EBY-q8-O0m"/>
+                    <constraint firstItem="QoF-mc-5Bg" firstAttribute="leading" secondItem="4fQ-IN-Ccv" secondAttribute="trailing" constant="10" id="Nst-7t-B9g"/>
+                    <constraint firstItem="KMn-Rk-jSO" firstAttribute="leading" secondItem="vvR-al-h9s" secondAttribute="leading" id="XAs-hs-gwD"/>
+                    <constraint firstItem="QoF-mc-5Bg" firstAttribute="centerY" secondItem="4fQ-IN-Ccv" secondAttribute="centerY" id="dL4-Kh-iOL"/>
+                    <constraint firstItem="4fQ-IN-Ccv" firstAttribute="top" secondItem="vvR-al-h9s" secondAttribute="topMargin" id="kUb-XE-BJS"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="4fQ-IN-Ccv" secondAttribute="trailing" id="lfP-QT-aTX"/>
+                    <constraint firstAttribute="bottom" secondItem="KMn-Rk-jSO" secondAttribute="bottom" id="zKb-DH-jB2"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="lfP-QT-aTX"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="assetCountLbl" destination="QoF-mc-5Bg" id="QWB-j9-61G"/>
+                <outlet property="titleLbl" destination="4fQ-IN-Ccv" id="ds7-up-HE7"/>
+            </connections>
+            <point key="canvasLocation" x="188" y="166"/>
+        </tableViewCell>
+    </objects>
+</document>

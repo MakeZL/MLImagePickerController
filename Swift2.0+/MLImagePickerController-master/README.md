@@ -27,7 +27,6 @@ MLImagePickerController 使用Swift写的基于PhotoKit的简单易用的相册�
 
 系统要求
 ==============
-支持Swift3.0, 同时支持Swift2.0+
 该项目最低支持 `iOS 8.0` 和 `Xcode 7.0`。
 
 关于问题

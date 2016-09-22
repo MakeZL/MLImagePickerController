@@ -11,7 +11,7 @@ import UIKit
 import PhotosUI
 
 protocol MLImagePickerAssetsCellDelegate {
-    func imagePickerSelectAssetsCellWithSelected(indexPath:IndexPath,selected:Bool) -> Bool;
+    func imagePickerSelectAssetsCellWithSelected(indexPath:NSIndexPath,let selected:Bool) -> Bool;
 }
 
 class MLImagePickerAssetsCell: UICollectionViewCell {
@@ -23,37 +23,37 @@ class MLImagePickerAssetsCell: UICollectionViewCell {
     var asset:PHAsset!
     var delegate:MLImagePickerAssetsCellDelegate?
     var localIdentifier:String!
-    var indexPath:IndexPath!
+    var indexPath:NSIndexPath!
     var isShowVideo:Bool!{ // Default is Hide
         didSet{
-            self.videoMaskImgV.isHidden = !isShowVideo
+            self.videoMaskImgV.hidden = !isShowVideo
         }
     }
     var selectButtonSelected:Bool! {
         didSet{
-            if self.selectButton.isSelected == selectButtonSelected {
+            if self.selectButton.selected == selectButtonSelected {
                 return
             }
-            self.selectButton.isSelected = selectButtonSelected
+            self.selectButton.selected = selectButtonSelected
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let noImage = UIImage.ml_imageFromBundleNamed(named: "zl_icon_image_no") as UIImage
-        let yesImage = UIImage.ml_imageFromBundleNamed(named: "zl_icon_image_yes") as UIImage
+        let noImage = UIImage.ml_imageFromBundleNamed("zl_icon_image_no") as UIImage
+        let yesImage = UIImage.ml_imageFromBundleNamed("zl_icon_image_yes") as UIImage
         
-        self.videoMaskImgV.image = UIImage.ml_imageFromBundleNamed(named: "zl_video-play") as UIImage
-        self.selectButton.setImage(noImage, for: .normal)
-        self.selectButton.setImage(yesImage, for: .selected)
+        self.videoMaskImgV.image = UIImage.ml_imageFromBundleNamed("zl_video-play") as UIImage
+        self.selectButton.setImage(noImage, forState: .Normal)
+        self.selectButton.setImage(yesImage, forState: .Selected)
     }
     
     @IBAction func selectPhoto() {
         if self.delegate != nil {
-            let btnSelected = self.delegate?.imagePickerSelectAssetsCellWithSelected(indexPath: self.indexPath, selected: !self.selectButton.isSelected)
+            let btnSelected = self.delegate?.imagePickerSelectAssetsCellWithSelected(self.indexPath, selected: !self.selectButton.selected)
             if btnSelected == true {
-                self.selectButton.isSelected = !self.selectButton.isSelected
+                self.selectButton.selected = !self.selectButton.selected
             }
         }
     }
